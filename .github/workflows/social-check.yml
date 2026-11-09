@@ -1,0 +1,41 @@
+# Instagram bağlantı kontrolü (yalnızca okur, paylaşım YAPMAZ).
+# Bu dosyaya dokunan bir push ile çalışır; erişim kodu yalnızca GitHub gizli bilgisinde (IG_ACCESS_TOKEN).
+name: Instagram baglanti kontrolu
+on:
+  push:
+    paths:
+      - .github/workflows/social-check.yml
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Hesap bilgisini oku
+        env:
+          TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
+          IG_USER_ID: ${{ secrets.IG_USER_ID }}
+        run: |
+          set +e
+          if [ -z "$TOKEN" ] || [ -z "$IG_USER_ID" ]; then echo "GIZLI BILGI EKSIK (IG_ACCESS_TOKEN / IG_USER_ID)"; exit 1; fi
+          echo "Token uzunlugu: ${#TOKEN}"
+          for host in graph.instagram.com graph.facebook.com; do
+            echo "== $host (me)"
+            curl -s "https://$host/v23.0/me?fields=id,username,account_type,media_count&access_token=$TOKEN" | sed "s/$TOKEN/***/g"; echo
+            echo "== $host (ig user)"
+            curl -s "https://$host/v23.0/$IG_USER_ID?fields=id,username,media_count&access_token=$TOKEN" | sed "s/$TOKEN/***/g"; echo
+          done
+          echo "== yayin kotasi"
+          for host in graph.instagram.com graph.facebook.com; do
+            curl -s "https://$host/v23.0/$IG_USER_ID/content_publishing_limit?fields=quota_usage,config&access_token=$TOKEN" | sed "s/$TOKEN/***/g"; echo
+          done
+      - name: Gecici yukleme + silme denemesi (tekqr.com/paylasim)
+        env:
+          FTP_SERVER: ${{ secrets.FTP_SERVER }}
+          SITE_FTP_USERNAME: ${{ secrets.SITE_FTP_USERNAME }}
+          SITE_FTP_PASSWORD: ${{ secrets.SITE_FTP_PASSWORD }}
+        run: |
+          sudo apt-get install -y lftp > /dev/null
+          N="deneme-$(date +%s).txt"; echo "tekqr paylasim testi" > "$N"
+          lftp -u "$SITE_FTP_USERNAME","$SITE_FTP_PASSWORD" "ftp://$FTP_SERVER" -e "set ftp:ssl-force true; set ssl:verify-certificate yes; mkdir -p public/paylasim; put $N -o public/paylasim/$N; quit"
+          sleep 3; echo "yuklendi -> $(curl -s -o /dev/null -w '%{http_code}' https://tekqr.com/paylasim/$N)"
+          lftp -u "$SITE_FTP_USERNAME","$SITE_FTP_PASSWORD" "ftp://$FTP_SERVER" -e "set ftp:ssl-force true; set ssl:verify-certificate yes; rm -f public/paylasim/$N; quit"
+          sleep 2; echo "silindi -> $(curl -s -o /dev/null -w '%{http_code}' https://tekqr.com/paylasim/$N)"

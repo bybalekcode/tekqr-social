@@ -1,0 +1,10 @@
+{
+  "status": "ready",
+  "at": "2026-11-11T12:20:00+03:00",
+  "type": "IMAGE",
+  "files": [
+    "w2-g3.jpg"
+  ],
+  "caption": "Web siteniz yok ya da açılmıyor mu? Sorun değil. 🌐\n\nTekQR ile işletmenizin adına (isletmeniz.tekqr.com) telefona göre tasarlanmış bir karşılama sayfanız olur: logonuz, renkleriniz, fotoğraflı menünüz, \"Açık · Kapanış 23:00\" durumu, tek dokunuşla konum ve arama.\n\nInstagram bio'nuza, Google profilinize ve WhatsApp'ınıza ekleyin. Kurulumu biz yapıyoruz.\n\nPaketler ve ücretsiz deneme: tekqr.com (profildeki bağlantı)\n\n#websitesi #dijitalmenü #qrmenü #kafe #restoran #tekqr",
+  "note": "mini karşılama sayfası serisi · kullanıcı onayı (5 Kasım: 'belirtmiş olduğun saatlerde paylaşım yapabilirsin') · g3 · 9 Kas: GitHub Actions durduğu için (depo gizli) birikenlerle birlikte yeniden sıralandı · 9 Kas: kullanıcı isteğiyle bir gün öne alındı (Salı → bugün)"
+}

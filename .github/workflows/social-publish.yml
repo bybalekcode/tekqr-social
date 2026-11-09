@@ -1,0 +1,35 @@
+# Instagram paylaşımı (anında): main dalında kuyruk/medya değişince çalışır.
+# Zamanlı paylaşım main dalındaki social-schedule.yml ile saatte bir. Ayrıntı: .github/social/publish.py
+name: Instagram paylasim
+on:
+  push:
+    branches: [main]
+    paths: [queue/**, media/**]
+concurrency: { group: social-publish, cancel-in-progress: false }
+permissions: { contents: write }
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: { ref: main }
+      - name: Paylas
+        env:
+          IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
+          IG_USER_ID: ${{ secrets.IG_USER_ID }}
+          FTP_SERVER: ${{ secrets.FTP_SERVER }}
+          SITE_FTP_USERNAME: ${{ secrets.SITE_FTP_USERNAME }}
+          SITE_FTP_PASSWORD: ${{ secrets.SITE_FTP_PASSWORD }}
+        run: |
+          if ! ls queue/*.json >/dev/null 2>&1; then echo "Kuyruk bos"; exit 0; fi
+          if ! grep -lq "\"status\": \"ready\"" queue/*.json; then echo "Bekleyen paylasim yok"; exit 0; fi
+          sudo apt-get install -y lftp > /dev/null
+          python3 .github/social/publish.py
+      - name: Durumu kaydet
+        if: always()
+        run: |
+          git config user.name "TekQR Sosyal"; git config user.email "actions@users.noreply.github.com"
+          git add -A queue media
+          git diff --cached --quiet && exit 0
+          git commit -m "Sosyal: paylaşım durumu güncellendi"
+          for i in 1 2 3; do git pull --rebase -q origin main && git push origin HEAD:main && exit 0; sleep 5; done; exit 1

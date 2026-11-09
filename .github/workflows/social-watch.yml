@@ -1,0 +1,112 @@
+# Instagram bekçisi: GitHub'ın saatlik zamanlayıcısı güvenilir değil (saatlerce atlayabiliyor).
+# Bu görev sürekli açık durur, her dakika main dalındaki kuyruğa (queue/) bakar; saati gelmiş "ready"
+# paylaşım varsa social-schedule.yml'yi hemen başlatır (paylaşımı o yapar). ~5 saat 40 dk sonra
+# kendini yeniden başlatır (zincir). Zincir koparsa aşağıdaki yarım saatlik zamanlayıcı yeniden kurar.
+# Aynı anda tek bekçi: yedek çalışma, açık bir bekçi görürse hemen çıkar.
+name: Instagram bekci
+# Not (9 Kasım 2026): depo GİZLİ olursa bekçi Actions dakikalarını 1,5 günde bitirir ve tüm işler durur.
+# Bekçi yalnızca depo herkese açıkken çalıştırılmalı.
+on:
+  schedule:
+    - cron: "17,47 * * * *"
+  workflow_dispatch:
+    inputs:
+      handoff:
+        description: "Önceki bekçiden devir (iç kullanım)"
+        required: false
+        default: ""
+permissions: { contents: read, actions: write }
+jobs:
+  watch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 355
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 1
+          filter: blob:none
+          sparse-checkout: queue
+      - name: Bekle ve tetikle
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+          RUN_ID: ${{ github.run_id }}
+          HANDOFF: ${{ inputs.handoff }}
+        run: |
+          python3 -u - <<'PY'
+          import json, os, subprocess, sys, time, urllib.request
+          from datetime import datetime, timezone
+
+          API = f"https://api.github.com/repos/{os.environ['REPO']}"
+          HDR = {"Authorization": f"Bearer {os.environ['GH_TOKEN']}",
+                 "Accept": "application/vnd.github+json", "X-GitHub-Api-Version": "2022-11-28"}
+          LIFETIME = 340 * 60      # bu kadar sonra devret
+          RETRY = 10 * 60          # hâlâ "ready" ise tekrar tetikleme aralığı
+
+          def api(method, path, body=None):
+              data = json.dumps(body).encode() if body is not None else None
+              req = urllib.request.Request(API + path, data=data, method=method, headers=HDR)
+              with urllib.request.urlopen(req, timeout=30) as r:
+                  raw = r.read()
+                  return json.loads(raw) if raw else None
+
+          def dispatch(workflow, inputs=None):
+              body = {"ref": "main"}
+              if inputs:
+                  body["inputs"] = inputs
+              api("POST", f"/actions/workflows/{workflow}/dispatches", body)
+
+          def git(*args):
+              return subprocess.run(["git", *args], check=True, capture_output=True, text=True).stdout
+
+          # Aynı anda tek bekçi
+          if not os.environ.get("HANDOFF"):
+              runs = api("GET", "/actions/workflows/social-watch.yml/runs?status=in_progress&per_page=20")
+              others = [r["id"] for r in runs.get("workflow_runs", []) if str(r["id"]) != os.environ["RUN_ID"]]
+              if others:
+                  print(f"Açık bekçi var ({others}); çıkılıyor.")
+                  sys.exit(0)
+
+          start = time.time()
+          last = {}   # dosya -> son tetikleme zamanı
+          print("Bekçi başladı.")
+          while time.time() - start < LIFETIME:
+              try:
+                  git("fetch", "-q", "--depth", "1", "origin", "main")
+                  names = [n for n in git("ls-tree", "--name-only", "FETCH_HEAD", "queue/").split()
+                           if n.endswith(".json")]
+                  now = datetime.now(timezone.utc)
+                  due = []
+                  for n in names:
+                      try:
+                          item = json.loads(git("show", f"FETCH_HEAD:{n}"))
+                      except Exception as e:
+                          print(f"{n}: okunamadı ({e})")
+                          continue
+                      if item.get("status") != "ready":
+                          continue
+                      at = item.get("at")
+                      if at and datetime.fromisoformat(at) > now:
+                          continue
+                      due.append(n)
+                  fresh = [n for n in due if time.time() - last.get(n, 0) > RETRY]
+                  if fresh:
+                      print(f"{now:%H:%M} UTC saati gelen: {fresh} -> paylaşım başlatılıyor")
+                      dispatch("social-schedule.yml")
+                      for n in fresh:
+                          last[n] = time.time()
+              except Exception as e:
+                  print(f"Uyarı: {e}")
+              time.sleep(60 - (time.time() % 60) + 5)   # her dakikanın 5. saniyesi
+
+          print("Süre doldu, yeni bekçi başlatılıyor.")
+          for i in range(5):
+              try:
+                  dispatch("social-watch.yml", {"handoff": "1"})
+                  print("Devredildi.")
+                  break
+              except Exception as e:
+                  print(f"Devir denemesi {i + 1} başarısız: {e}")
+                  time.sleep(20)
+          PY
