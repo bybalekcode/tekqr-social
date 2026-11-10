@@ -1,9 +1,11 @@
 {
-  "status": "ready",
+  "status": "published",
   "at": "2026-11-10T10:20:00+03:00",
   "type": "STORY_IMAGE",
   "files": [
     "w1-s7.jpg"
   ],
-  "note": "1. hafta · s7 · kullanıcı onayı (4 Kasım: 'Reels haricindekileri plana ekle') · 9 Kas: GitHub Actions durduğu için (depo gizli) birikenlerle birlikte yeniden sıralandı · 9 Kas: kullanıcı isteğiyle bir gün öne alındı (Salı → bugün)"
+  "note": "1. hafta · s7 · kullanıcı onayı (4 Kasım: 'Reels haricindekileri plana ekle') · 9 Kas: GitHub Actions durduğu için (depo gizli) birikenlerle birlikte yeniden sıralandı · 9 Kas: kullanıcı isteğiyle bir gün öne alındı (Salı → bugün)",
+  "media_id": "18361265923216421",
+  "published_at": "2026-11-10T07:20:41+00:00"
 }
