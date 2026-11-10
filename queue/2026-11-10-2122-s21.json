@@ -1,9 +1,11 @@
 {
-  "status": "ready",
+  "status": "published",
   "at": "2026-11-10T21:22:00+03:00",
   "type": "STORY_IMAGE",
   "files": [
     "w2-s21.jpg"
   ],
-  "note": "mini karşılama sayfası serisi · kullanıcı onayı (5 Kasım: 'belirtmiş olduğun saatlerde paylaşım yapabilirsin') · s21 · 9 Kas: GitHub Actions durduğu için (depo gizli) birikenlerle birlikte yeniden sıralandı · 9 Kas: kullanıcı isteğiyle bir gün öne alındı (Salı → bugün)"
+  "note": "mini karşılama sayfası serisi · kullanıcı onayı (5 Kasım: 'belirtmiş olduğun saatlerde paylaşım yapabilirsin') · s21 · 9 Kas: GitHub Actions durduğu için (depo gizli) birikenlerle birlikte yeniden sıralandı · 9 Kas: kullanıcı isteğiyle bir gün öne alındı (Salı → bugün)",
+  "media_id": "18598049188068582",
+  "published_at": "2026-11-10T18:22:49+00:00"
 }
