@@ -1,10 +1,12 @@
 {
-  "status": "ready",
+  "status": "published",
   "at": "2026-11-11T20:20:00+03:00",
   "type": "REELS",
   "files": [
     "reels-03-bio.mp4"
   ],
   "caption": "Bio'nuzdaki bağlantı ne açıyor? 👀\n\nDağınık bağlantılar, yakınlaştırınca bile okunmayan PDF menü, artık açılmayan eski bir site… Misafir sizi Instagram'da buluyor ama aradığını bulamıyor.\n\nTekQR ile işletmenizin adına açılmış, her zaman açılan bir karşılama sayfanız olur: menü, konum, telefon ve çalışma saatleri tek bağlantıda. Masadaki QR'da, Instagram bio'nuzda ve Google profilinizde aynı sayfa.\n\nBio'nuz, işletmenizin vitrini.\n\nPaketler ve ücretsiz deneme: tekqr.com (profildeki bağlantı)\n\n#tekqr #instagrambio #dijitalmenü #qrmenü #kafe #restoran #trabzon",
-  "note": "Reels 3 · Bio'nuzda ne var? (docs/bio-reels, Doğa) · kullanıcı onayı (5 Kasım: 'Reels için tarih onaylıyorum', Pzt 10 Kas 20:20) · 9 Kas: GitHub Actions durduğu için (depo gizli) birikenlerle birlikte yeniden sıralandı · 9 Kas: kullanıcı isteğiyle bir gün öne alındı (Salı → bugün)"
+  "note": "Reels 3 · Bio'nuzda ne var? (docs/bio-reels, Doğa) · kullanıcı onayı (5 Kasım: 'Reels için tarih onaylıyorum', Pzt 10 Kas 20:20) · 9 Kas: GitHub Actions durduğu için (depo gizli) birikenlerle birlikte yeniden sıralandı · 9 Kas: kullanıcı isteğiyle bir gün öne alındı (Salı → bugün)",
+  "media_id": "18451723012130615",
+  "published_at": "2026-11-11T17:22:03+00:00"
 }
