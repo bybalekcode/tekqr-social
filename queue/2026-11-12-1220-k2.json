@@ -1,5 +1,5 @@
 {
-  "status": "ready",
+  "status": "published",
   "at": "2026-11-12T12:20:00+03:00",
   "type": "CAROUSEL",
   "files": [
@@ -12,5 +12,7 @@
     "w1-k2-7.jpg"
   ],
   "caption": "Google puanınızı yükseltmenin 5 yolu 📌 Kaydedin, ekibinizle paylaşın.\n\n1) Doğru anda isteyin\n2) Kötü yorumu önce siz duyun\n3) Memnunu Google'a yönlendirin\n4) Her yoruma cevap verin\n5) Puanları ekiple takip edin\n\nTekQR 2. ve 3. yolu sizin yerinize yapar.\n\nPaketler ve ücretsiz deneme: tekqr.com (profildeki bağlantı)\n\n#googleyorum #restoranişletmeciliği #kafeişletmeciliği #tekqr #müşterideneyimi #restoran",
-  "note": "1. hafta · k2-1,k2-2,k2-3,k2-4,k2-5,k2-6,k2-7 · kullanıcı onayı (4 Kasım: 'Reels haricindekileri plana ekle') · 9 Kas: GitHub Actions durduğu için (depo gizli) birikenlerle birlikte yeniden sıralandı · 9 Kas: kullanıcı isteğiyle bir gün öne alındı (Salı → bugün)"
+  "note": "1. hafta · k2-1,k2-2,k2-3,k2-4,k2-5,k2-6,k2-7 · kullanıcı onayı (4 Kasım: 'Reels haricindekileri plana ekle') · 9 Kas: GitHub Actions durduğu için (depo gizli) birikenlerle birlikte yeniden sıralandı · 9 Kas: kullanıcı isteğiyle bir gün öne alındı (Salı → bugün)",
+  "media_id": "18129772979295198",
+  "published_at": "2026-11-12T09:21:50+00:00"
 }
