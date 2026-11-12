@@ -1,5 +1,5 @@
 {
-  "status": "ready",
+  "status": "published",
   "at": "2026-11-12T20:20:00+03:00",
   "type": "CAROUSEL",
   "files": [
@@ -12,5 +12,7 @@
     "w1-k1-7.jpg"
   ],
   "caption": "Bir QR, altı kapı. 👇\n\nMisafiriniz masadaki QR'ı okuttuğunda menü, değerlendirme, konum, telefon, Instagram ve web siteniz tek ekranda açılır. Uygulama yok, üyelik yok.\n\nKaydırın, her kapıyı tek tek görün →\nBonus: aynı sayfa Instagram bio'nuzda da çalışır.\n\nPaketler ve ücretsiz deneme: tekqr.com (profildeki bağlantı)\n\n#tekqr #qrmenü #dijitalmenü #restoran #kafe #otel #restoranişletmeciliği",
-  "note": "1. hafta · k1-1,k1-2,k1-3,k1-4,k1-5,k1-6 · kullanıcı onayı (4 Kasım: 'Reels haricindekileri plana ekle') · k1-7 bonus (5 Kasım kullanıcı onayı) · Osman Reels için 6 Kas akşamından ertesi güne (Cumartesi 7 Kas) ertelendi · 6 Kas: kullanıcı isteğiyle 'Birden fazla menü' karuseli bu saate (Cmt 7 Kas 15:20) alındı, k1 Perşembe 12 Kas 20:20'ye kaydı · 9 Kas: GitHub Actions durduğu için (depo gizli) birikenlerle birlikte yeniden sıralandı · 9 Kas: kullanıcı isteğiyle bir gün öne alındı (Salı → bugün)"
+  "note": "1. hafta · k1-1,k1-2,k1-3,k1-4,k1-5,k1-6 · kullanıcı onayı (4 Kasım: 'Reels haricindekileri plana ekle') · k1-7 bonus (5 Kasım kullanıcı onayı) · Osman Reels için 6 Kas akşamından ertesi güne (Cumartesi 7 Kas) ertelendi · 6 Kas: kullanıcı isteğiyle 'Birden fazla menü' karuseli bu saate (Cmt 7 Kas 15:20) alındı, k1 Perşembe 12 Kas 20:20'ye kaydı · 9 Kas: GitHub Actions durduğu için (depo gizli) birikenlerle birlikte yeniden sıralandı · 9 Kas: kullanıcı isteğiyle bir gün öne alındı (Salı → bugün)",
+  "media_id": "18117571793130341",
+  "published_at": "2026-11-12T17:22:25+00:00"
 }
