@@ -1,10 +1,12 @@
 {
-  "status": "ready",
+  "status": "published",
   "at": "2026-11-13T20:20:00+03:00",
   "type": "IMAGE",
   "files": [
     "w1-g2.jpg"
   ],
   "caption": "Fotoğrafı olan ürün kendini satar. 📸\n\nMisafir ne geleceğini görür, kararsız kalmaz. TekQR menüde her ürünün fotoğrafı, kalorisi, alerjenleri ve içindekileri aynı ekranda.\n\nPaketler ve ücretsiz deneme: tekqr.com (profildeki bağlantı)\n\n#dijitalmenü #qrmenü #menütasarımı #restoran #kafe #tekqr",
-  "note": "1. hafta · g2 · kullanıcı onayı (4 Kasım: 'Reels haricindekileri plana ekle') · 9 Kas: GitHub Actions durduğu için (depo gizli) birikenlerle birlikte yeniden sıralandı · 9 Kas: kullanıcı isteğiyle bir gün öne alındı (Salı → bugün)"
+  "note": "1. hafta · g2 · kullanıcı onayı (4 Kasım: 'Reels haricindekileri plana ekle') · 9 Kas: GitHub Actions durduğu için (depo gizli) birikenlerle birlikte yeniden sıralandı · 9 Kas: kullanıcı isteğiyle bir gün öne alındı (Salı → bugün)",
+  "media_id": "18103721669561566",
+  "published_at": "2026-11-13T17:20:43+00:00"
 }
